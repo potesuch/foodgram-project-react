@@ -4,7 +4,7 @@ services:
   frontend_foodgram:
     image: potesuch/foodgram-project-react-frontend
     volumes:
-      - frontend_foodgram:/app/result_build/
+      - ./frontend/:/app/result_build/
   db_foodgram:
     image: postgres:13.0-alpine
     ports:
@@ -30,7 +30,7 @@ services:
       - "84:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - frontend_foodgram:/usr/share/nginx/html/
+      - ./frontend/build/:/usr/share/nginx/html/
       - ./docs/:/usr/share/nginx/html/api/docs/
       - static_value_foodgram:/var/html/static/
       - media_value_foodgram:/var/html/media/
@@ -38,7 +38,6 @@ services:
       - backendfoodgram
 
 volumes:
-  frontend_foodgram:
   static_value_foodgram:
   media_value_foodgram:
   postgres_data_foodgram:
