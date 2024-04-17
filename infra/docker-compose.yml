@@ -2,21 +2,19 @@ version: '3.3'
 services:
 
   frontend_foodgram:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: potesuch/foodgram-project-react-frontend
     volumes:
       - ../frontend/:/app/result_build/
   db_foodgram:
     image: postgres:13.0-alpine
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
       - postgres_data_foodgram:/var/lib/postgresql/data/
     env_file:
       - ./.env
   backendfoodgram:
-    build: ../backend
+    image: potesuch/foodgram-project-react-backend
     ports:
       - "8003:8000"
     volumes:
