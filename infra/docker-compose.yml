@@ -4,7 +4,7 @@ services:
   frontend_foodgram:
     image: potesuch/foodgram-project-react-frontend
     volumes:
-      - ../frontend/:/app/result_build/
+      - ./frontend/:/app/result_build/
   db_foodgram:
     image: postgres:13.0-alpine
     ports:

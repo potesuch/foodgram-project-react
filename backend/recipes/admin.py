@@ -56,8 +56,8 @@ class ShoppingCartAdmin(admin.ModelAdmin):
 
 @admin.register(Favorite)
 class FavoriteAdmin(admin.ModelAdmin):
-    list_display = ('recipe__name', 'user')
-    search_fields = ('recipe__name', 'user')
+    list_display = ('get_recipe_name', 'user')
+    search_fields = ('get_recipe_name', 'user')
 
     @admin.display(description='ingredient name')
     def get_recipe_name(self, obj):
