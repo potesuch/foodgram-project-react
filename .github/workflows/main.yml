@@ -54,7 +54,7 @@ jobs:
             sudo docker compose exec backendfoodgram python manage.py collectstatic --noinput
             sudo docker compose exec backendfoodgram python manage.py load_data User Category Genre Title GenreTitle Review Comment
             sudo docker compose cp ingredients.csv db_foodgram:/var/lib/postgresql/data/ingredients.csv
-            sudo docker compose exec db_foodgram bash su - postgres -c "psql -c \"COPY recipes_ingredient(name, measurement_unit) FROM '/var/lib/postgresql/data/ingredients.csv' DELIMITER ',' CSV\""
+            sudo docker compose exec db_foodgram bash psql -U postgres -c "COPY recipes_ingredient(name, measurement_unit) FROM '/var/lib/postgresql/data/ingredients.csv' DELIMITER ',' CSV""
 
   send_message:
     runs-on: ubuntu-latest
