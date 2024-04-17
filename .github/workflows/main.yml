@@ -2,7 +2,7 @@ name: foodgram-project-react CI
 on: [push]
 jobs:
   build_and_push_to_docker_hub:
-    name: Push Docker image to Docker hub
+    name: Push Docker images to Docker hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
