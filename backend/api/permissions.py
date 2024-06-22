@@ -2,6 +2,9 @@ from rest_framework import permissions
 
 
 class IsAuthorOrStuffOrReadOnly(permissions.BasePermission):
+    """
+    Кастомное разрешение, позволяющее доступ только автору, персоналу или для чтения.
+    """
 
     def has_permission(self, request, view):
         return (request.method in permissions.SAFE_METHODS
@@ -15,6 +18,9 @@ class IsAuthorOrStuffOrReadOnly(permissions.BasePermission):
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
+    """
+    Кастомное разрешение, позволяющее доступ только администраторам или для чтения.
+    """
 
     def has_permission(self, request, view):
         return (request.method in permissions.SAFE_METHODS

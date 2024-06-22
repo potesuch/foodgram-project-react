@@ -7,6 +7,14 @@ User = get_user_model()
 
 
 class Tag(models.Model):
+    """
+    Модель тега для рецептов.
+
+    Attributes:
+        name (CharField): Название тега.
+        color (CharField): Цвет тега.
+        slug (SlugField): Уникальный идентификатор тега.
+    """
     name = models.CharField('Тэг', max_length=100, unique=True)
     color = models.CharField('Цвет', max_length=7, unique=True)
     slug = models.SlugField(unique=True)
@@ -21,6 +29,13 @@ class Tag(models.Model):
 
 
 class Ingredient(models.Model):
+    """
+    Модель ингредиента для рецептов.
+
+    Attributes:
+        name (CharField): Название ингредиента.
+        measurement_unit (CharField): Единица измерения ингредиента.
+    """
     name = models.CharField('Название', max_length=100)
     measurement_unit = models.CharField('Еденица измерения', max_length=20)
 
@@ -34,6 +49,18 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
+    """
+    Модель рецепта.
+
+    Attributes:
+        tags (ManyToManyField): Теги, связанные с рецептом.
+        author (ForeignKey): Автор рецепта.
+        ingredients (ManyToManyField): Ингредиенты, связанные с рецептом.
+        name (CharField): Название рецепта.
+        image (ImageField): Изображение рецепта.
+        text (TextField): Описание рецепта.
+        cooking_time (PositiveSmallIntegerField): Время приготовления в минутах.
+    """
     tags = models.ManyToManyField(Tag, related_name='recipes',
                                   verbose_name='Тэги')
     author = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -60,6 +87,14 @@ class Recipe(models.Model):
 
 
 class AmountIngredient(models.Model):
+    """
+    Модель количества ингредиентов в рецепте.
+
+    Attributes:
+        ingredient (ForeignKey): Связанный ингредиент.
+        recipe (ForeignKey): Связанный рецепт.
+        amount (PositiveSmallIntegerField): Количество ингредиента.
+    """
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE,
                                    related_name='amount_recipes',
                                    verbose_name='Ингредиент')
@@ -79,6 +114,13 @@ class AmountIngredient(models.Model):
 
 
 class ShoppingCart(models.Model):
+    """
+    Модель корзины покупок.
+
+    Attributes:
+        recipe (ForeignKey): Рецепт в корзине.
+        user (ForeignKey): Пользователь, владеющий корзиной.
+    """
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE,
                                related_name='in_shopping_carts',
                                verbose_name='Рецепт')
@@ -96,6 +138,13 @@ class ShoppingCart(models.Model):
 
 
 class Favorite(models.Model):
+    """
+    Модель избранного рецепта.
+
+    Attributes:
+        recipe (ForeignKey): Избранный рецепт.
+        user (ForeignKey): Пользователь, добавивший рецепт в избранное.
+    """
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE,
                                related_name='in_favorites',
                                verbose_name='Рецепт')
