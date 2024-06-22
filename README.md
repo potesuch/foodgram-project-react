@@ -65,8 +65,8 @@ POST /api/recipes/{id}/shopping_cart/
 ### Клонирование репозитория
 
 ``` sh
-git clone https://github.com/yourusername/foodgram.git
-cd foodgram
+git clone https://github.com/potesuch/foodgram-project-react.git
+cd foodgram-project-react
 ```
 
 ### Сборка и запуск контейнеров
